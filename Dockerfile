@@ -16,7 +16,7 @@ RUN npm ci
 COPY . .
 
 # Build TypeScript
-RUN npm run build
+
 
 # Create data and uploads directories
 RUN mkdir -p data uploads
