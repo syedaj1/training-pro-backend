@@ -14,7 +14,7 @@ RUN npm ci
 # Copy rest of source
 COPY . .
 
-# 🔥 BUILD TYPESCRIPT (ye missing tha)
+# BUILD TYPESCRIPT (ye missing tha)
 RUN npm run build
 
 # Create folders
