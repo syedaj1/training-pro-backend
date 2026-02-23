@@ -1,9 +1,8 @@
 FROM node:18-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Install dependencies for better-sqlite3
+# Install system deps
 RUN apk add --no-cache python3 make g++
 
 # Copy package files
@@ -12,21 +11,15 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
-# Copy source code
+# Copy rest of source
 COPY . .
 
-# Build TypeScript
+# 🔥 BUILD TYPESCRIPT (ye missing tha)
+RUN npm run build
 
-
-# Create data and uploads directories
+# Create folders
 RUN mkdir -p data uploads
 
-# Expose port
 EXPOSE 3001
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1
-
-# Start the application
 CMD ["node", "dist/index.js"]
